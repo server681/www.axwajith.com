@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page V3</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <!-- Flag Icons CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css"
+  />
+  <style>
+    body {
+      margin: 0;
+      background: url('https://images3.alphacoders.com/135/thumb-1920-1355524.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .profile-card {
+      width: 100%;
+      max-width: 500px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .profile-picture {
+      border-radius: 50%;
+      border: 4px solid var(--badge-color, #ccc);
+    }
+    .meta-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #0095f6;
+      color: white;
+      font-size: 0.9rem;
+      margin-left: 8px;
+    }
+    .meta-verified-badge i {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-card">
+    <!-- Profile Header -->
+    <div class="relative">
+      <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt="Header Background" class="w-full h-32 object-cover">
+      <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+        <div class="flex items-center">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/demoprobeta3.appspot.com/o/main%2F6210899374352897220_1286016882.jpg?alt=media&token=cd7b4763-d3c7-4813-8257-a8c2ac9609f3"
+            alt="Profile"
+            class="w-20 h-20 profile-picture"
+            style="--badge-color: #08ff5a;">
+          <div class="ml-4 text-white">
+            <h1 class="text-2xl font-bold flex items-center">
+              Aswajith Raj
+              <span class="meta-verified-badge" title="Meta Verified Account">
+                <i class="fas fa-check"></i>
+              </span>
+            </h1>
+            <p class="text-sm">Pen Tester</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="p-6">
+      <div class="mb-4">
+        <h2 class="text-lg font-semibold">About Me</h2>
+        <p class="text-gray-600">I am a professional penetration tester working within the dark web for LAPSUS$. I specialize in exploiting system vulnerabilities and uncovering security weaknesses through illicit methods to gain valuable insights.</p>
+      </div>
+      <div class="mb-4">
+        <h2 class="text-lg font-semibold">Location</h2>
+        <p class="text-gray-600 flex items-center">
+          <span class="fi fi-us mr-2" aria-label="USA Flag"></span> Unknown
+        </p>
+      </div>
+      <div class="mb-4">
+        <h2 class="text-lg font-semibold">Languages</h2>
+        <div class="flex space-x-4">
+          <span class="fi fi-us" title="English (Native)" aria-label="USA Flag"></span>
+          </div>
+      </div>
+      <div class="mb-4">
+    <h2 class="text-lg font-semibold">Social Media</h2>
+    <div class="flex space-x-4">
+        <a href="https://t.me/axwajith_bot" target="_blank" class="text-gray-400 hover:text-[#0088cc]">
+            <i class="fab fa-telegram fa-lg"></i>
+        </a>
+        <a href="https://discord.com/users/1299620811266719756" target="_blank" class="text-gray-400 hover:text-[#7289da]">
+            <i class="fab fa-discord fa-lg"></i>
+        </a>
+        <a href="https://github.com/server681" target="_blank" class="text-gray-400 hover:text-[#181717]">
+            <i class="fab fa-github fa-lg"></i>
+        </a>
+        <a href="https://www.reddit.com/u/imakeyoufool/s/uvQq3LM3w1" target="_blank" class="text-gray-400 hover:text-[#FF4500]">
+          <i class="fab fa-reddit fa-lg"></i>
+      </a>
+        <a href="https://www.instagram.com/_axwajith/profilecard/" target="_blank" class="text-gray-400 hover:text-[#E4405F]">
+            <i class="fab fa-instagram fa-lg"></i>
+        </a>
+        <a href="https://tiktok.com/@psychohx" target="_blank" class="text-gray-400 hover:text-[#000000]">
+            <i class="fab fa-tiktok fa-lg"></i>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
