@@ -54,6 +54,11 @@
     .meta-verified-badge i {
       font-size: 14px;
     }
+    .location-section span {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 8px;
+    }
   </style>
 </head>
 <body>
@@ -87,10 +92,11 @@
         <h2 class="text-lg font-semibold">About Me</h2>
         <p class="text-gray-600">I am a professional penetration tester working within the dark web for LAPSUS$. I specialize in exploiting system vulnerabilities and uncovering security weaknesses through illicit methods to gain valuable insights.</p>
       </div>
-      <div class="mb-4">
+     <div class="mb-4">
         <h2 class="text-lg font-semibold">Location</h2>
-        <p class="text-gray-600 flex items-center">
-          <span class="fi fi-us mr-2" aria-label="USA Flag"></span> Unknown
+        <p id="location" class="location-section text-gray-600 flex items-center">
+          <span id="country-flag" class="fi"></span>
+          <span id="country-name"></span>
         </p>
       </div>
       <div class="mb-4">
@@ -126,6 +132,213 @@
     </div>
 </div>
 
+<script>
+  // Array of countries and their flags
+  const countries = [
+{ name: "Afghanistan", flag: "fi-af" },
+{ name: "Albania", flag: "fi-al" },
+{ name: "Algeria", flag: "fi-dz" },
+{ name: "Andorra", flag: "fi-ad" },
+{ name: "Angola", flag: "fi-ao" },
+{ name: "Antigua and Barbuda", flag: "fi-ag" },
+{ name: "Argentina", flag: "fi-ar" },
+{ name: "Armenia", flag: "fi-am" },
+{ name: "Australia", flag: "fi-au" },
+{ name: "Austria", flag: "fi-at" },
+{ name: "Azerbaijan", flag: "fi-az" },
+{ name: "Bahamas", flag: "fi-bs" },
+{ name: "Bahrain", flag: "fi-bh" },
+{ name: "Bangladesh", flag: "fi-bd" },
+{ name: "Barbados", flag: "fi-bb" },
+{ name: "Belarus", flag: "fi-by" },
+{ name: "Belgium", flag: "fi-be" },
+{ name: "Belize", flag: "fi-bz" },
+{ name: "Benin", flag: "fi-bj" },
+{ name: "Bhutan", flag: "fi-bt" },
+{ name: "Bolivia", flag: "fi-bo" },
+{ name: "Bosnia and Herzegovina", flag: "fi-ba" },
+{ name: "Botswana", flag: "fi-bw" },
+{ name: "Brazil", flag: "fi-br" },
+{ name: "Brunei", flag: "fi-bn" },
+{ name: "Bulgaria", flag: "fi-bg" },
+{ name: "Burkina Faso", flag: "fi-bf" },
+{ name: "Burundi", flag: "fi-bi" },
+{ name: "Cabo Verde", flag: "fi-cv" },
+{ name: "Cambodia", flag: "fi-kh" },
+{ name: "Cameroon", flag: "fi-cm" },
+{ name: "Canada", flag: "fi-ca" },
+{ name: "Central African Republic", flag: "fi-cf" },
+{ name: "Chad", flag: "fi-td" },
+{ name: "Chile", flag: "fi-cl" },
+{ name: "China", flag: "fi-cn" },
+{ name: "Colombia", flag: "fi-co" },
+{ name: "Comoros", flag: "fi-km" },
+{ name: "Congo (Congo-Brazzaville)", flag: "fi-cg" },
+{ name: "Congo (Congo-Kinshasa)", flag: "fi-cd" },
+{ name: "Costa Rica", flag: "fi-cr" },
+{ name: "Croatia", flag: "fi-hr" },
+{ name: "Cuba", flag: "fi-cu" },
+{ name: "Cyprus", flag: "fi-cy" },
+{ name: "Czechia", flag: "fi-cz" },
+{ name: "Denmark", flag: "fi-dk" },
+{ name: "Djibouti", flag: "fi-dj" },
+{ name: "Dominica", flag: "fi-dm" },
+{ name: "Dominican Republic", flag: "fi-do" },
+{ name: "Ecuador", flag: "fi-ec" },
+{ name: "Egypt", flag: "fi-eg" },
+{ name: "El Salvador", flag: "fi-sv" },
+{ name: "Equatorial Guinea", flag: "fi-gq" },
+{ name: "Eritrea", flag: "fi-er" },
+{ name: "Estonia", flag: "fi-ee" },
+{ name: "Eswatini", flag: "fi-sz" },
+{ name: "Ethiopia", flag: "fi-et" },
+{ name: "Fiji", flag: "fi-fj" },
+{ name: "Finland", flag: "fi-fi" },
+{ name: "France", flag: "fi-fr" },
+{ name: "Gabon", flag: "fi-ga" },
+{ name: "Gambia", flag: "fi-gm" },
+{ name: "Georgia", flag: "fi-ge" },
+{ name: "Germany", flag: "fi-de" },
+{ name: "Ghana", flag: "fi-gh" },
+{ name: "Greece", flag: "fi-gr" },
+{ name: "Grenada", flag: "fi-gd" },
+{ name: "Guatemala", flag: "fi-gt" },
+{ name: "Guinea", flag: "fi-gn" },
+{ name: "Guinea-Bissau", flag: "fi-gw" },
+{ name: "Guyana", flag: "fi-gy" },
+{ name: "Haiti", flag: "fi-ht" },
+{ name: "Honduras", flag: "fi-hn" },
+{ name: "Hungary", flag: "fi-hu" },
+{ name: "Iceland", flag: "fi-is" },
+{ name: "India", flag: "fi-in" },
+{ name: "Indonesia", flag: "fi-id" },
+{ name: "Iran", flag: "fi-ir" },
+{ name: "Iraq", flag: "fi-iq" },
+{ name: "Ireland", flag: "fi-ie" },
+{ name: "Israel", flag: "fi-il" },
+{ name: "Italy", flag: "fi-it" },
+{ name: "Jamaica", flag: "fi-jm" },
+{ name: "Japan", flag: "fi-jp" },
+{ name: "Jordan", flag: "fi-jo" },
+{ name: "Kazakhstan", flag: "fi-kz" },
+{ name: "Kenya", flag: "fi-ke" },
+{ name: "Kiribati", flag: "fi-ki" },
+{ name: "Kuwait", flag: "fi-kw" },
+{ name: "Kyrgyzstan", flag: "fi-kg" },
+{ name: "Laos", flag: "fi-la" },
+{ name: "Latvia", flag: "fi-lv" },
+{ name: "Lebanon", flag: "fi-lb" },
+{ name: "Lesotho", flag: "fi-ls" },
+{ name: "Liberia", flag: "fi-lr" },
+{ name: "Libya", flag: "fi-ly" },
+{ name: "Liechtenstein", flag: "fi-li" },
+{ name: "Lithuania", flag: "fi-lt" },
+{ name: "Luxembourg", flag: "fi-lu" },
+{ name: "Madagascar", flag: "fi-mg" },
+{ name: "Malawi", flag: "fi-mw" },
+{ name: "Malaysia", flag: "fi-my" },
+{ name: "Maldives", flag: "fi-mv" },
+{ name: "Mali", flag: "fi-ml" },
+{ name: "Malta", flag: "fi-mt" },
+{ name: "Marshall Islands", flag: "fi-mh" },
+{ name: "Mauritania", flag: "fi-mr" },
+{ name: "Mauritius", flag: "fi-mu" },
+{ name: "Mexico", flag: "fi-mx" },
+{ name: "Micronesia", flag: "fi-fm" },
+{ name: "Moldova", flag: "fi-md" },
+{ name: "Monaco", flag: "fi-mc" },
+{ name: "Mongolia", flag: "fi-mn" },
+{ name: "Montenegro", flag: "fi-me" },
+{ name: "Morocco", flag: "fi-ma" },
+{ name: "Mozambique", flag: "fi-mz" },
+{ name: "Myanmar (Burma)", flag: "fi-mm" },
+{ name: "Namibia", flag: "fi-na" },
+{ name: "Nauru", flag: "fi-nr" },
+{ name: "Nepal", flag: "fi-np" },
+{ name: "Netherlands", flag: "fi-nl" },
+{ name: "New Zealand", flag: "fi-nz" },
+{ name: "Nicaragua", flag: "fi-ni" },
+{ name: "Niger", flag: "fi-ne" },
+{ name: "Nigeria", flag: "fi-ng" },
+{ name: "North Korea", flag: "fi-kp" },
+{ name: "North Macedonia", flag: "fi-mk" },
+{ name: "Norway", flag: "fi-no" },
+{ name: "Oman", flag: "fi-om" },
+{ name: "Pakistan", flag: "fi-pk" },
+{ name: "Palau", flag: "fi-pw" },
+{ name: "Palestine", flag: "fi-ps" },
+{ name: "Panama", flag: "fi-pa" },
+{ name: "Papua New Guinea", flag: "fi-pg" },
+{ name: "Paraguay", flag: "fi-py" },
+{ name: "Peru", flag: "fi-pe" },
+{ name: "Philippines", flag: "fi-ph" },
+{ name: "Poland", flag: "fi-pl" },
+{ name: "Portugal", flag: "fi-pt" },
+{ name: "Qatar", flag: "fi-qa" },
+{ name: "Romania", flag: "fi-ro" },
+{ name: "Russia", flag: "fi-ru" },
+{ name: "Rwanda", flag: "fi-rw" },
+{ name: "Saint Kitts and Nevis", flag: "fi-kn" },
+{ name: "Saint Lucia", flag: "fi-lc" },
+{ name: "Saint Vincent and the Grenadines", flag: "fi-vc" },
+{ name: "Samoa", flag: "fi-ws" },
+{ name: "San Marino", flag: "fi-sm" },
+{ name: "Sao Tome and Principe", flag: "fi-st" },
+{ name: "Saudi Arabia", flag: "fi-sa" },
+{ name: "Senegal", flag: "fi-sn" },
+{ name: "Serbia", flag: "fi-rs" },
+{ name: "Seychelles", flag: "fi-sc" },
+{ name: "Sierra Leone", flag: "fi-sl" },
+{ name: "Singapore", flag: "fi-sg" },
+{ name: "Slovakia", flag: "fi-sk" },
+{ name: "Slovenia", flag: "fi-si" },
+{ name: "Solomon Islands", flag: "fi-sb" },
+{ name: "Somalia", flag: "fi-so" },
+{ name: "South Africa", flag: "fi-za" },
+{ name: "South Korea", flag: "fi-kr" },
+{ name: "South Sudan", flag: "fi-ss" },
+{ name: "Spain", flag: "fi-es" },
+{ name: "Sri Lanka", flag: "fi-lk" },
+{ name: "Sudan", flag: "fi-sd" },
+{ name: "Suriname", flag: "fi-sr" },
+{ name: "Sweden", flag: "fi-se" },
+{ name: "Switzerland", flag: "fi-ch" },
+{ name: "Syria", flag: "fi-sy" },
+{ name: "Tajikistan", flag: "fi-tj" },
+{ name: "Tanzania", flag: "fi-tz" },
+{ name: "Thailand", flag: "fi-th" },
+{ name: "Timor-Leste", flag: "fi-tl" },
+{ name: "Togo", flag: "fi-tg" },
+{ name: "Tonga", flag: "fi-to" },
+{ name: "Trinidad and Tobago", flag: "fi-tt" },
+{ name: "Tunisia", flag: "fi-tn" },
+{ name: "Turkey", flag: "fi-tr" },
+{ name: "Turkmenistan", flag: "fi-tm" },
+{ name: "Tuvalu", flag: "fi-tv" },
+{ name: "Uganda", flag: "fi-ug" },
+{ name: "Ukraine", flag: "fi-ua" },
+{ name: "United Arab Emirates", flag: "fi-ae" },
+{ name: "United Kingdom", flag: "fi-gb" },
+{ name: "United States", flag: "fi-us" },
+{ name: "Uruguay", flag: "fi-uy" },
+{ name: "Uzbekistan", flag: "fi-uz" },
+{ name: "Vanuatu", flag: "fi-vu" },
+{ name: "Vatican City", flag: "fi-va" },
+{ name: "Venezuela", flag: "fi-ve" },
+{ name: "Vietnam", flag: "fi-vn" },
+{ name: "Yemen", flag: "fi-ye" },
+{ name: "Zambia", flag: "fi-zm" },
+{ name: "Zimbabwe", flag: "fi-zw" }
+];
+
+  // Randomly select a country for location
+  const randomCountry = countries[Math.floor(Math.random() * countries.length)];
+
+  // Update the location with proper spacing
+  document.getElementById("country-flag").className = `${randomCountry.flag} fi`;
+  document.getElementById("country-name").textContent = randomCountry.name;
+</script>
+      
 </body>
 </html>
 
